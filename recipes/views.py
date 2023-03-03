@@ -3,9 +3,9 @@ from recipes.models import Recipe
 
 
 def home(request):
-    recipes = Recipe.objects.filter(is_published=True).order_by('-id')
+    recipes = Recipe.objects.filter(is_published=True).order_by('-id') # noqa: E501,E261
     return render(request, 'recipes/pages/home.html', context={
-        'recipes': recipes
+        'recipes': recipes,
     })
 
 

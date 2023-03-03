@@ -8,6 +8,8 @@
             
             {% for recipe in recipes %}
                 {% include 'recipes/partials/recipe.html' %}
-            {% endfor %}
+            {% empty %}
+                <h1>No recipes found</h1>
+            {% endfor %} 
         </div>
    {% endblock content %}
