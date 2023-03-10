@@ -19,7 +19,7 @@ class RecipeModelsTest(RecipesTestBase):
             title='Receita Teste',
             description='Descrição teste',
             preparation_time=25, 
-            slug='test-slug',
+            slug='test_slug',
             preparation_time_unit='min',
             servings=5,
             servings_unit='pessoas',

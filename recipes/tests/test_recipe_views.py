@@ -50,5 +50,16 @@ class RecipeViewsTest(RecipesTestBase):
     def test_recipe_view_return_404_if_no_recipe_found(self):
         response = self.client.get(reverse('recipes:recipe', kwargs={'id': 1000}))
         self.assertEqual(response.status_code, 404)
-    
 
+    #Search
+    def test_recipe_search_view_function_is_correct(self):
+        view = resolve(reverse('recipes:search'))
+        self.assertIs(view.func, views.search)
+
+    def test_search_view_return_correct_template(self):
+        response = self.client.get(reverse('recipes:search')+'?q=k')
+        self.assertTemplateUsed(response, 'recipes/pages/search.html')
+
+    def test_search_raises_404_if_no_search_term(self):
+        response = self.client.get(reverse('recipes:search'))
+        self.assertEqual(response.status_code, 404)
