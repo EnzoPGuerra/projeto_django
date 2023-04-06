@@ -7,9 +7,8 @@ from recipes import models
 def rand_ratio():
     return randint(840, 900), randint(473, 573)
 
-class RecipesTestBase(TestCase):
-    def setUp(self) -> None:
-        return super().setUp()
+
+class RecipeMixin:
     
     def make_category(self, name='Category'):
         return models.Category.objects.create(name=name)
@@ -64,3 +63,19 @@ class RecipesTestBase(TestCase):
                 cover=cover,
                 category=self.make_category(**category),
                 author=self.make_author(**author))
+    
+    def make_recipe_alot(self, qtd=10):
+        recipes = []
+        for i in range(qtd):
+            kwargs = {
+                'title': f'Recipe Title {i}',
+                'slug': f'r{i}', 
+                'author': {'username': f'u{i}'}}
+            recipe = self.make_recipe(**kwargs)
+            recipes.append(recipe)
+        return recipes
+
+
+class RecipesTestBase(TestCase, RecipeMixin):
+    def setUp(self) -> None:
+        return super().setUp()
